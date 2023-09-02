@@ -1,0 +1,92 @@
+﻿@model layoutProject.Models.Order
+@*
+@model Locations*@
+@{
+    ViewData["Title"] = "OrderRequest";
+    Layout = "~/Views/Shared/_AboutLayoutProject.cshtml";
+}
+@section mainSection{
+    <h1>Order Request</h1>
+    <form>
+
+        <div>
+            @Html.ValidationSummary(false,"Please fix the following Error",new {@class="text-danger"})
+        </div>
+        <table>
+            <tr>
+                <td>@Html.Label("Order Id")</td>
+                <td>@Html.TextBox("OrderId")
+                    <span asp-validation-for="OrderId" class="text-danger" ></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Order Key")</td>
+                <td>@Html.Password("OrderKey")
+                    <span asp-validation-for="OrderKey" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Phone Number")</td>
+                <td>@Html.TextBox("Phone")
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Email Address")</td>
+                <td>@Html.TextBox("Email")  <span asp-validation-for="Email" class="text-danger"></span></td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Delivery Payment")</td>
+                <td>
+                    @Html.RadioButton("Payment","Cash",true)@Html.Label("Cash")
+                    @Html.RadioButton("Payment","Card")@Html.Label("Credit/Debit Card")
+                    
+                </td>
+
+            </tr>
+            <tr>
+                <td>@Html.Label("Quantity")</td>
+                <td><input type="number" name="Quantity" value="1" id="Quantity" min="1" max="5" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Unit Price")</td>
+                <td>@Html.TextBox("Price")
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </td>
+                @*<td><input type="number" name="Price" id="Price" /></td>*@
+            </tr>
+            <tr>
+                <td>@Html.Label("Delivery Options")</td>
+                <td>
+                    @Html.CheckBox("Packaging")@Html.Label("Packaging")<br />
+                    @Html.CheckBox("Tracking")@Html.Label("Tracking")
+                </td>
+
+            </tr>
+            <tr>
+                <td>@Html.Label("Destination Address")</td>
+                <td>@Html.TextArea("Address")
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.Label("Location")</td>
+                <td>@Html.DropDownList("Location",@Html.GetEnumSelectList<Locations>()) </td>
+            </tr>
+            <tr>
+                <td> <button type="submit">Send Order</button>  </td>
+                <td> <input type="reset" value="Clear"></td>
+            </tr>
+        </table>
+    </form>
+
+
+
+
+
+    <h1>OrderRequest mansoor</h1>
+}
+
+

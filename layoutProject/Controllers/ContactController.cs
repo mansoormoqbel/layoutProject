@@ -12,6 +12,10 @@ namespace layoutProject.Controllers
         {
             return View();
         }
+        public IActionResult Contact1()
+        {
+            return View();
+        }
         public IActionResult Blog()
         {
             return View();
