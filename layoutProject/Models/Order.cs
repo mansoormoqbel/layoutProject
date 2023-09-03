@@ -30,7 +30,7 @@ namespace layoutProject.Models
         public string Location { get; set; }
         [MaxLength(100)]
         public string Address { get; set; }
-
+       
 
 
 

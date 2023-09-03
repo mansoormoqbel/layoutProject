@@ -7,7 +7,7 @@
 }
 @section mainSection{
     <h1>Order Request</h1>
-    <form>
+    <form  method="post" asp-action="Index" asp-controller="Order">
 
         <div>
             @Html.ValidationSummary(false,"Please fix the following Error",new {@class="text-danger"})

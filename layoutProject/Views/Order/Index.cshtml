@@ -1,10 +1,45 @@
-﻿
+﻿@model Order
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AboutLayoutProject.cshtml";
 }
 @section mainSection{
     <h1>Index order mansoor</h1>
+    <div >
+        @ViewBag.Header
+    </div>
+       @*  /*
+            
+           
+            Payment
+           
+            Packaging
+            Tracking
+            
+             */*@
+    <div> Order ID :@ViewBag.MyOrder.OrderId</div>
+    <div> Order Key  :@ViewBag.MyOrder.OrderKey </div>
+    <div> Phone  :@ViewBag.MyOrder.Phone </div>
+    <div> Email  :@ViewBag.MyOrder.Email</div>
+    <div> Quantity  :@ViewBag.MyOrder.Quantity </div>
+    <div> Price  : @Convert.ToDecimal(Model.Quantity * Model.Price)  </div>
+    
+    <div>
+        Delivery Options:
+        @if (Model.Packaging)
+        {
+        @Html.Display("Packaging")
+        @Html.DisplayName("Packaging")
+        }
+        @if (Model.Tracking)
+        {
+            @Html.Display("Tracking")
+            @Html.DisplayName("Tracking")
+        }
+    </div>
+    <div> Location  :@ViewBag.MyOrder.Location </div>
+    <div> Address  :@ViewBag.MyOrder.Address </div>
+    <div></div>
 }
 
 
