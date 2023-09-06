@@ -1,0 +1,50 @@
+USE [DeliveryDB]
+GO
+/****** Object:  StoredProcedure [dbo].[OrderInsert]    Script Date: 9/6/2023 2:47:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+/*CREATE PROCEDURE <Procedure_Name, sysname, ProcedureName> 
+	-- Add the parameters for the stored procedure here
+	<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>, 
+	<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
+END*/
+ALTER PROCEDURE [dbo].[OrderInsert]
+	-- Add the parameters for the stored procedure here
+	@OrderId   INT   ,        
+    @OrderKey  VARCHAR (7) ,  
+    @Phone     VARCHAR (15)  ,
+    @Email     VARCHAR (50) , 
+    @Payment   CHAR (10)   ,  
+    @Quantity  INT          ,
+    @Price     REAL   ,      
+    @Packaging BIT          , 
+    @Tracking  BIT           , 
+    @Location  VARCHAR (20) ,
+    @Address   VARCHAR(MAX) -- Use VARCHAR(MAX) instead of TEXT
+
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Insert into Orders(OrderId, OrderKey, Phone, Email, Payment, Quantity, Price, Packaging, Tracking, Location, Address)
+	Values (@OrderId, @OrderKey, @Phone, @Email, @Payment, @Quantity, @Price, @Packaging, @Tracking, @Location, @Address);
+END
