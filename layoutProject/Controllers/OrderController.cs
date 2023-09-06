@@ -15,25 +15,55 @@ namespace layoutProject.Controllers
     {
         SqlConnection con = new SqlConnection(@"Data Source= DESKTOP-360NCCM\MSSQLSERVER01; Integrated Security=true;Initial Catalog= DeliveryDB; ");
         SqlCommand cmd = new SqlCommand();
+
+        
+
         public IActionResult Index()
         {
-
-            // Define the connection string and the query
-            
-            string query = "SELECT * FROM Orders";
-
-            // Create a connection and a command objects
-            using (con)
+          /* try
             {
-                SqlCommand command = new SqlCommand(query, con);
-
-                // Open the connection and execute the query
+                //1- Open the Connetion to DB server
                 con.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "SelectOrder";
 
-                // Pass the reader to the view using ViewBag
-                ViewBag.Reader = reader;
+
+               
+
+
+
+                //RowAffected
+                int RowAffected = cmd.ExecuteNonQuery();
+                if (RowAffected > 0)
+                {
+                    ViewBag.Message = "Record Inserted";
+                }
+                else
+                {
+                    ViewBag.Message = "Error, Record not Inserted";
+                }
+
+
+
+
             }
+            catch (ArgumentNullException ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View("Error", new ErrorViewModel());
+            }
+            finally
+            {
+                // 5-close the con
+                con.Close();
+            }
+
+            */
 
             // Return the view
             return View();
@@ -44,7 +74,8 @@ namespace layoutProject.Controllers
         }
         public IActionResult InsertOrder(Order CurrentOrder)
         {
-            try
+
+            /*try
             {
                 //1- Open the Connetion to DB server
                 con.Open();
@@ -77,8 +108,8 @@ namespace layoutProject.Controllers
                     ViewBag.Message = "Error, Record not Inserted";
                 }
 
-                
-               
+
+
 
             }
             catch(ArgumentNullException ex)
@@ -94,7 +125,70 @@ namespace layoutProject.Controllers
             {
                 // 5-close the con
                 con.Close();
+            }*/
+            //ViewBag.MyOrder = CurrentOrder;
+            try
+            {
+                //1- Open the Connetion to DB server
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "OrderInsert";
+
+                cmd.Parameters.AddWithValue("@OrderId", CurrentOrder.OrderId);
+                cmd.Parameters.AddWithValue("@OrderKey", CurrentOrder.OrderKey);
+                cmd.Parameters.AddWithValue("@Phone", CurrentOrder.Phone);
+                cmd.Parameters.AddWithValue("@Email", CurrentOrder.Email);
+                cmd.Parameters.AddWithValue("@Payment", CurrentOrder.Payment);
+                cmd.Parameters.AddWithValue("@Quantity", CurrentOrder.Quantity);
+                cmd.Parameters.AddWithValue("@Price", CurrentOrder.Price);
+                cmd.Parameters.AddWithValue("@Packaging", CurrentOrder.Packaging);
+                cmd.Parameters.AddWithValue("@Tracking", CurrentOrder.Tracking);
+                cmd.Parameters.AddWithValue("@Location", CurrentOrder.Location);
+                cmd.Parameters.AddWithValue("@Address", CurrentOrder.Address);
+
+
+
+                //RowAffected
+                int RowAffected = cmd.ExecuteNonQuery();
+                
+                if (RowAffected > 0)
+                {
+                    ViewBag.Message = "Record Inserted";
+                }
+                else
+                {
+
+                    ViewBag.Message = RowAffected;
+                    //ViewBag.Message = "Error, Record not Inserted";
+                }
+
+
+
+
             }
+            catch (ArgumentNullException ex)
+            {
+                //MessageBox.Show(ex.Message);
+                ViewBag.Message = ex.Message;
+            }
+            catch (SqlException ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View("Error", new ErrorViewModel());
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Message = ex.Message;
+                return View("Error", new ErrorViewModel());
+            }
+            finally
+            {
+                // 5-close the con
+                con.Close();
+            }
+            con.Close();
             return View("Index");
         }
     }

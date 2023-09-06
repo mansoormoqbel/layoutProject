@@ -8,6 +8,71 @@
     <div>
         @ViewBag.Message
     </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">order key</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Location</th>
+                <th scope="col">Address</th>
+                <th scope="col">Delivery Options</th>
+                <th scope="col">Handle</th>
+                 <th scope="col">Phone</th>
+                <th scope="col">Handle</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @*<tr>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>@ViewBag.MyOrder.OrderId</td>
+
+                <td>@ViewBag.MyOrder.OrderId</td>
+                <td>
+                    JJJJ
+                </td>
+
+            </tr>
+        
+            @while (ViewBag.Reader.Read())
+            {
+                <tr>
+                    <td>@ViewBag.Reader["OrderId"]</td>
+                    <td>@ViewBag.Reader["OrderKey"]</td>
+                    <td>@ViewBag.Reader["Phone"]</td>
+                    <td>@ViewBag.Reader["Email"]</td>
+                    <td>@ViewBag.Reader["Price"]</td>
+                    <td>@ViewBag.Reader["Quantity"]</td>
+                    <td>@ViewBag.Reader["Payment"]</td>
+                    <td>@ViewBag.Reader["Location"]</td>
+
+                    <td>@ViewBag.Reader["Address"]</td>
+                    <td>
+                        @if (@ViewBag.Reader["Packaging"] == 0)
+                        {
+                            @ViewBag.Tracking 
+                        }else
+                        {
+                           @ViewBag.Packaging
+                        }
+                    </td>
+
+                </tr>
+        }*@
+            
+        </tbody>
+    </table>
     @*<div >
         @ViewBag.Header
     </div>
